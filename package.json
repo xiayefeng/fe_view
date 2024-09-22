@@ -11,6 +11,7 @@
   "dependencies": {
     "cubehelix": "^1.0.4",
     "gl-renderer": "^0.14.0",
-    "ogl": "^1.0.8"
+    "ogl": "^1.0.8",
+    "spritejs": "^3.8.3"
   }
 }
