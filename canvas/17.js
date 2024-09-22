@@ -247,3 +247,39 @@ void main() {
 
 
 ```
+
+```
+vec3 getNormal() {
+  vec3 pos_dx = dFdx(vPos.xyz);
+  vec3 pos_dy = dFdy(vPos.xyz);
+  vec2 tex_dx = dFdx(vUv);
+  vec2 tex_dy = dFdy(vUv);
+
+  vec3 t = normalize(pos_dx * tex_dy.t - pos_dy * tex_dx.t);
+  vec3 b = normalize(-pos_dx * tex_dy.s + pos_dy * tex_dx.s);
+  mat3 tbn = mat3(t, b, normalize(vNormal));
+
+  vec3 n = texture(tNormal, vUv).rgb * 2.0 - 1.0;
+  return normalize(tbn * n);
+}
+
+```
+
+```
+uniform float uTime;
+
+void main() {
+  vec3 eyeDirection = normalize(vCameraPos - vPos);
+  vec3 normal = getNormal();
+  vec4 phong = phongReflection(vPos, normal, eyeDirection);
+  // vec4 phong = phongReflection(vPos, vNormal, eyeDirection);
+
+  vec3 tex = texture(tMap, vUv).rgb;
+  vec3 light = normalize(vec3(sin(uTime), 1.0, cos(uTime)));
+  float shading = dot(normal, light) * 0.5;
+  
+  FragColor.rgb = tex + shading;
+  FragColor.a = 1.0;
+}
+
+```
