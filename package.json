@@ -9,7 +9,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@qcharts/core": "^1.0.37",
     "cubehelix": "^1.0.4",
+    "d3": "^7.9.0",
     "gl-renderer": "^0.14.0",
     "ogl": "^1.0.8",
     "spritejs": "^3.8.3"

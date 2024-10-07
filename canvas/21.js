@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 let cache = null;
 async function getData(toDate = new Date()) {
   if(!cache) {
